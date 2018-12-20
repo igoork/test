@@ -8,6 +8,7 @@ pipeline {
         stage('Download kubectl') {
         	steps {
         	    cleanWs()
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '91e7f183-9001-4173-8f3a-46c9f35acdce', url: 'https://github.com/igoork/test.git']]])
         		sh '''curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl'''
         	}
         }
